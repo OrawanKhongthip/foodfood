@@ -14,6 +14,10 @@ public class Order {
         this.orderName = name;
     }
 
+    public String getOrderName() {
+        return this.orderName;
+    }
+
     public void addFood(Food selectedFood) {
         food.add(selectedFood);
     }
@@ -35,7 +39,7 @@ public class Order {
         return food.get(foodId);
     }
     
-    public ArrayList<Food> getAllFood() {
+    public ArrayList<Food> getFoodArrayList() {
         return this.food;
     }
 }

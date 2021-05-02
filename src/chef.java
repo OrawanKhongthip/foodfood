@@ -2,7 +2,6 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
 
 import java.util.ArrayList;
 
@@ -84,8 +83,8 @@ public class Chef extends Users {
                     int fin;
                     do {
                         System.out.println("--- Customer Orders Management ---");
-                        System.out.println(">> Type 1 to show your current order!");
-                        System.out.println("or Type 99 to go back <<");
+                        // System.out.println(">> Type 1 to show your current order!");
+                        System.out.println("Type 99 to go back <<");
                         System.out.print("•̀.̫•́✧ >> : ");
                         fin = sc.nextInt();
 

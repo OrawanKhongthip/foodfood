@@ -17,7 +17,7 @@ public class Customer extends Users {
             System.out.println("<< Type 99 to go back");
             System.out.print("Enter your name: ");
             username = sc.next();
-            order = Order(username);
+            order = new Order(username);
 
             if (!"99".equals(username)) {
                 super.setCustomer_name(username);
@@ -75,7 +75,7 @@ public class Customer extends Users {
                     
                     int selectMenu;
                     int choice;
-                    int finish = false;
+                    boolean finish = false;
                     
                     while (!finish) {
                         System.out.println("------- 3. Select menu -------");
