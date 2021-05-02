@@ -1,10 +1,12 @@
-
+import java.util.ArrayList;
 public abstract class Users {
-    private final String chef_username = "chef";
-    private final String chef_password = "1234";
+    protected final String chef_username = "chef";
+    protected final String chef_password = "1234";
     
     private static String customer_name = "customer";
-    
+    protected static InfiniteCircularArrayQueue queue = new InfiniteCircularArrayQueue();
+    protected static ArrayList<Order> totalOrder = new ArrayList<Order>();
+    protected static ArrayList<Food> totalFoodMenu = new ArrayList<Food>();
     
     public abstract void control();
 

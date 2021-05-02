@@ -2,23 +2,22 @@
 public class InfiniteCircularArrayQueue {
 	// ----------------- data --------------
 	private final int CAPACITY = 10;
-	private int[] data; // array to store queue data
+	private Order[] data; // array to store queue data
 	private int front = 0; // pointer for first queue element
 	private int size = 0; // size of queue (no. of elements)
 
 	// ----------------- method --------------
 	public InfiniteCircularArrayQueue() {
-		data = new int[CAPACITY];
+		data = new Order[CAPACITY];
 	}
 
 	public InfiniteCircularArrayQueue(int capacity) {
-		data = new int[capacity];
+		data = new Order[capacity];
 	}
 
-	public void enqueue(int element) {
+	public void enqueue(Order element) {
 		
 		int total_elem = this.size;
-		
 		if (total_elem >= data.length) {
 			resize(2);
 		}
@@ -29,8 +28,8 @@ public class InfiniteCircularArrayQueue {
 
 	}
 
-	public int dequeue() {
-		int dq_elem = data[this.front];
+	public Order dequeue() {
+		Order dq_elem = data[this.front];
 		this.data[this.front] = 0;
 		int new_front = (this.front + 1) % this.data.length;
 		this.front = new_front;
@@ -38,8 +37,7 @@ public class InfiniteCircularArrayQueue {
 		return dq_elem;
 	}
 
-	public int peek() {
-
+	public Order peek() {
 		return this.data[this.front];
 	}
 
@@ -59,7 +57,7 @@ public class InfiniteCircularArrayQueue {
 	}
 
 	private void resize(int multiplier) {
-		int newData[] = new int[this.data.length * multiplier];
+		Order newData[] = new Order[this.data.length * multiplier];
 		int total_elem = this.size;
 		for (int i = 0; i < total_elem; i++) {
 			newData[i] = data[(this.front + i) % this.data.length];
@@ -95,14 +93,6 @@ public class InfiniteCircularArrayQueue {
 			System.out.print(data[i] + " ");
 		}
 		System.out.println("");
-	}
-
-	public int sum() {
-		int sum = 0;
-		for (int i = 0; i < data.length; i++) {
-			sum += data[i];
-		}
-		return sum;
 	}
 
 }
