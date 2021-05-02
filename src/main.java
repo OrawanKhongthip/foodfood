@@ -16,6 +16,8 @@ public class Main {
 
             if (inputrole == 1) {
                 // Customer area
+                Customer ctm = new Customer();
+                ctm.control();
                 System.out.println("Sorry kub, Not avilable now (TT)");
             } else if (inputrole == 2) {
                 Chef ch = new Chef();

@@ -16,6 +16,7 @@ public class InfiniteCircularArrayQueue {
 	}
 
 	public void enqueue(Order element) {
+		
 		int total_elem = this.size;
 		if (total_elem >= data.length) {
 			resize(2);
@@ -24,6 +25,7 @@ public class InfiniteCircularArrayQueue {
 		//System.out.println("Rear: " + rear_idx);
 		data[rear_idx] = element;
 		size++;
+
 	}
 
 	public Order dequeue() {
@@ -51,6 +53,7 @@ public class InfiniteCircularArrayQueue {
 		} else {
 			return false;
 		}
+
 	}
 
 	private void resize(int multiplier) {
