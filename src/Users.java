@@ -5,7 +5,7 @@ public abstract class Users {
     
     private static String customer_name = "customer";
     protected static InfiniteCircularArrayQueue queue = new InfiniteCircularArrayQueue();
-    protected static ArrayList<Order> totalOrder = new ArrayList<Order>();
+    
     protected static ArrayList<Food> totalFoodMenu = new ArrayList<Food>();
     
     public abstract void control();
@@ -24,6 +24,13 @@ public abstract class Users {
 
     public void setCustomer_name(String name) {
         Users.customer_name = name;
+    }
+
+    public void floodScreen() {
+        int floodRange = 100;
+        for (int i = 0; i < floodRange ; i++) {
+            System.out.println(" ");
+        }
     }
  
     

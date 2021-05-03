@@ -10,20 +10,22 @@ public class Main {
         do {
             System.out.println("===== Hello Welcome to FOODFOOD!! ┗(•̀へ •́ ╮ ) =====");
             System.out.println("----- Please select your role first -----");
-            System.out.println("Enter types of user : 1 = Customer, 2 = Chef or types 99 to exit.");
+            System.out.println("Enter types of user : 1 = Customer, 2 = Chef or types 98 to exit.");
             System.out.print("•̀.̫•́✧ >> : ");
             inputrole = sc.nextInt();
 
             if (inputrole == 1) {
                 // Customer area
-                System.out.println("Sorry kub, Not avilable now (TT)");
+                Customer ctm = new Customer();
+                ctm.control();
+                
             } else if (inputrole == 2) {
                 Chef ch = new Chef();
                 ch.control();
-            } else if (inputrole == 99) {
+            } else if (inputrole == 98) {
                 System.out.println("Thanks, see you later! óò");
             }
-        }while(inputrole != 99);
+        }while(inputrole != 98);
 
 
 

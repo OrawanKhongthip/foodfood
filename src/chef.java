@@ -2,17 +2,17 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 import java.util.ArrayList;
 
 public class Chef extends Users {
 
-    Scanner sc;
+    Scanner sc, usc;
 
     @Override
     public void control() {
         sc = new Scanner(System.in);
-
+        usc = new Scanner(System.in).useDelimiter("\n");
+        floodScreen();
         System.out.println("----- Please Login to Chef's System -----");
         String username;
         String password;
@@ -25,6 +25,8 @@ public class Chef extends Users {
             if (username.equals(getChef_username()) && password.equals(getChef_password())) {
                 System.out.println("Login Successful!");
                 chefPanel();
+            } else if (username.equals("99")) {
+                break;
             } else {
                 System.out.println("username or password incorrect, please try again ᕙ(⇀‸↼‶)ᕗ");
             }
@@ -33,11 +35,13 @@ public class Chef extends Users {
     }
 
     private void chefPanel() {
-        System.out.println("****** Chef Panel ******");
-
+        floodScreen();
         int chose = 0;
         do {
             try {
+                
+                System.out.println("****** Chef Panel ******");
+
                 System.out.println("1. Add new menu\n2. List all available menus. \n3. Manage orders from customer");
                 System.out.println("( ︶︿︶) or Type 99 to go back");
                 System.out.print("•̀.̫•́✧ >> : ");
@@ -45,11 +49,14 @@ public class Chef extends Users {
 
                 // Add new menu
                 if (chose == 1) {
+                    floodScreen();
                     System.out.println("------ Add new menu to your collection! (/◕ヮ◕)/ ------");
-                    System.out.println("waiting for chef karnny");
+
                     int addAmount = 0;
                     System.out.print("How many food to add? : ");
+                    
                     addAmount = sc.nextInt();
+                    floodScreen();
 
                     for (int i = 0; i < addAmount; i++) {
                         String foodName = "";
@@ -57,67 +64,111 @@ public class Chef extends Users {
                         System.out.println("Food number #" + (i + 1));
                         System.out.print("Enter food name: ");
                         foodName = sc.next();
+                        
                         System.out.print("Enter food price: ");
-                        foodPrice = sc.nextInt();
-
+                        foodPrice = sc.nextDouble();
+                        
                         Food food = new Food(foodName, foodPrice);
                         totalFoodMenu.add(food);
+                        floodScreen();
                     }
-
-
 
                 } // List all avaliable menus
                 else if (chose == 2) {
+                    floodScreen();
                     System.out.println("------- Your available menus -------");
 
-                    // ArrayList<Food> totalFoodMenu = new ArrayList<Food>();
-                    for(int i = 0; i < totalFoodMenu.size(); i++){
-                        System.out.println("--------------------------");
-                        System.out.println("Food Number : " + i);
-                        System.out.println("Food Name : " + totalFoodMenu.get(i).getName());
-                        System.out.println("Food Price: " + totalFoodMenu.get(i).getPrice());
+                    if (totalFoodMenu.size() == 0) {
+                        System.out.println(" *** Sorry you have no any menu yet ***");
+                    } else {
+                        for (int i = 0; i < totalFoodMenu.size(); i++) {
+                            System.out.println("--------------------------");
+                            System.out.println("Food Number : " + i);
+                            System.out.println("Food Name : " + totalFoodMenu.get(i).getName());
+                            System.out.println("Food Price: " + totalFoodMenu.get(i).getPrice());
+                        }
                     }
-                    
+
                 } // manage order
                 else if (chose == 3) {
-                    int fin;
+                    floodScreen();
+                    String fin;
+                    System.out.println("--- Customer Orders Management ---");
+                    // System.out.println(">> Type 1 to show your current order!");
+                    queue.printQueue();
+                    System.out.println("You have " + queue.getSize() + " queue order in total");
+                    System.out.println(">> Type 99 to go back <<");
+                    System.out.println(">> Type y to fisnish your first upcomming order <<");
+                    System.out.print("•̀.̫•́✧ >> : ");
+
                     do {
-                        System.out.println("--- Customer Orders Management ---");
-                        // System.out.println(">> Type 1 to show your current order!");
-                        System.out.println("Type 99 to go back <<");
-                        System.out.print("•̀.̫•́✧ >> : ");
-                        fin = sc.nextInt();
 
-                        if (fin == 1) {
-                            // get order number from class Order
-                            // Order order = new Order();
+                        fin = sc.next();
 
-                            // get arrayList value
-                            // ArrayList<Food> orderList = order.getAllFood();
+                        if (fin.equals("y")) {
 
-                            // set Queue size
-                            // InfiniteCircularArrayQueue queue = new InfiniteCircularArrayQueue(orderList.size());
-                            // queue.enqueue(9);
-                            for (int i = 0; i < orderList.size(); i++) {
-                                queue.enqueue(orderList.getFood(i));
-                                queue.printQueue();
-
-                                System.out.println(">> Type 1 to finish this order ლ(´ڡ`ლ)");
-                                int select = sc.nextInt();
-
-                                if (select == 1) {
-                                    queue.dequeue(orderList.getFood(i));
-                                    System.out.println("Hope our customer enjoy their meal!");
-                                    System.out.println("◕‿◕");
-                                } else {
-                                    System.out.println("Please select some option ̴(T_T)");
-                                }
+                            if (queue.isEmpty()) {
+                                floodScreen();
+                                System.out.println(" ** There are no order to do rigth now ** ");
+                                System.out.println(">> Type 99 to go back <<");
+                                System.out.print("•̀.̫•́✧ >> : ");
+                            } else {
+                                floodScreen();
+                                Order finishedOrder;
+                                finishedOrder = queue.dequeue();
+                                System.out.println(
+                                        " ** You have finished order name: " + finishedOrder.getOrderName() + " **");
+                                System.out.println("========================");
+                                System.out.println("You have " + queue.getSize() + " queue order left");
+                                System.out.println(">> Type 99 to go back <<");
+                                System.out.println(">> Type 1 to show order list <<");
+                                System.out.println(">> Type y to fisnish your first upcomming order <<");
+                                System.out.print("•̀.̫•́✧ >> : ");
                             }
 
-                        } else {
-                            System.out.println("Please select some option ̴(T_T)");
+                        } else if (fin.equals("1")) {
+
+                            if (queue.isEmpty()) {
+                                floodScreen();
+                                System.out.println(" ** There are no order to do rigth now ** ");
+                                System.out.println(">> Type 99 to go back <<");
+                                System.out.print("•̀.̫•́✧ >> : ");
+                            } else {
+                                floodScreen();
+                                queue.printQueue();
+                                System.out.println("========================");
+                                System.out.println("You have " + queue.getSize() + " queue order left");
+                                System.out.println(">> Type 99 to go back <<");
+                                System.out.println(">> Type 1 to show order list <<");
+                                System.out.println(">> Type y to fisnish your first upcomming order <<");
+                                System.out.print("•̀.̫•́✧ >> : ");
+                            }
+
+                        } else if (fin.equals("99")) {
+                            floodScreen();
+                            break;
                         }
-                    } while (fin != 99);
+
+                        // for (int i = 0; i < orderList.size(); i++) {
+                        // queue.enqueue(orderList.getFood(i));
+                        // queue.printQueue();
+
+                        // System.out.println(">> Type 1 to finish this order ლ(´ڡ`ლ)");
+                        // int select = sc.nextInt();
+
+                        // if (select == 1) {
+                        // queue.dequeue(orderList.getFood(i));
+                        // System.out.println("Hope our customer enjoy their meal!");
+                        // System.out.println("◕‿◕");
+                        // } else {
+                        // System.out.println("Please select some option ̴(T_T)");
+                        // }
+                        // }
+
+                        // } else {
+                        // System.out.println("Please select some option ̴(T_T)");
+                        // }
+                    } while (!fin.equals("99"));
 
                 }
 
