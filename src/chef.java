@@ -6,12 +6,13 @@ import java.util.ArrayList;
 
 public class Chef extends Users {
 
-    Scanner sc;
+    Scanner sc, usc;
 
     @Override
     public void control() {
         sc = new Scanner(System.in);
-
+        usc = new Scanner(System.in).useDelimiter("\n");
+        floodScreen();
         System.out.println("----- Please Login to Chef's System -----");
         String username;
         String password;
@@ -47,11 +48,14 @@ public class Chef extends Users {
 
                 // Add new menu
                 if (chose == 1) {
+                    floodScreen();
                     System.out.println("------ Add new menu to your collection! (/◕ヮ◕)/ ------");
 
                     int addAmount = 0;
                     System.out.print("How many food to add? : ");
+                    
                     addAmount = sc.nextInt();
+                    floodScreen();
 
                     for (int i = 0; i < addAmount; i++) {
                         String foodName = "";
@@ -59,15 +63,18 @@ public class Chef extends Users {
                         System.out.println("Food number #" + (i + 1));
                         System.out.print("Enter food name: ");
                         foodName = sc.next();
+                        
                         System.out.print("Enter food price: ");
-                        foodPrice = sc.nextInt();
-
+                        foodPrice = sc.nextDouble();
+                        
                         Food food = new Food(foodName, foodPrice);
                         totalFoodMenu.add(food);
+                        floodScreen();
                     }
 
                 } // List all avaliable menus
                 else if (chose == 2) {
+                    floodScreen();
                     System.out.println("------- Your available menus -------");
 
                     if (totalFoodMenu.size() == 0) {
@@ -87,7 +94,6 @@ public class Chef extends Users {
                     System.out.println("--- Customer Orders Management ---");
                     // System.out.println(">> Type 1 to show your current order!");
                     queue.printQueue();
-
                     System.out.println(">> Type 99 to go back <<");
                     System.out.println(">> Type y to fisnish your first upcomming order <<");
                     System.out.print("•̀.̫•́✧ >> : ");

@@ -13,17 +13,21 @@ public class Customer extends Users {
     public void control() {
 
         do {
+            floodScreen();
             System.out.println("---- Welcome to FOODFOOD Customer's page ----");
             System.out.println("<< Type 99 to go back");
             System.out.print("Enter your name: ");
-            username = sc.next();
+            username = sc.next(); 
+            //username += "";
+            // System.out.println("Yourname is: '" + username +"'");
+            
             order = new Order(username);
 
             if (!"99".equals(username)) {
                 super.setCustomer_name(username);
                 CustomerPanal();
             } else {
-
+                
             }
 
         } while ((!"99".equals(username)));
@@ -42,13 +46,15 @@ public class Customer extends Users {
     private void CustomerPanal() {
         System.out.println("---- Customer's Panel ----");
 
+    private void CustomerPanal() {
+        floodScreen();
         int choose = 0;
 
         do {
             try {
 
                 System.out.println(
-                        "1. List all available menus\n2. List all items from your basket\n3. Select menu\n4. Purchase order\n5. Cancel order");
+                        "1. List all available menus\n2. List all items from your basket\n3. Select menu\n4. Purchase order\n5. Remove all item in basket");
                 System.out.println("<< Type 99 to go back");
                 System.out.print(">>> : ");
                 choose = sc.nextInt();
@@ -59,9 +65,11 @@ public class Customer extends Users {
 
                 } // 2. List all items from your basket
                 else if (choose == 2) {
+                    floodScreen();
                     System.out.println("------- 2. List all items from from your basket -------");
 
                     if (basket.size() == 0) {
+
                         System.out.println("=== There are no item in your basket! ===");
                     } else {
                         for (int i = 0; i < basket.size(); i++) {
@@ -94,12 +102,38 @@ public class Customer extends Users {
                                 System.out.println("You have selected " + totalFoodMenu.get(choice).getName());
                                 basket.add(totalFoodMenu.get(choice));
 
+                    while (!finish) {
+                        if (totalFoodMenu.size() == 0) {
+                            floodScreen();
+                            System.out.println(" !! There are no item to select yet !!");
+                            break;
+                        } else {
+                            listAllFoodMenu();
+                            System.out.println("------- 3. Select menu -------");
+                            System.out.println("<< Type 99 to go finish >>");
+                            System.out.print(">>>");
+                            choice = sc.nextInt();
+
+                            switch (choice) {
+                                case 99:
+                                    finish = true;
+                                    floodScreen();
+                                    break;
+
+                                default:
+                                    floodScreen();
+                                    System.out.println("You have added: " + totalFoodMenu.get(choice).getName()
+                                            + " into your basket");
+                                    basket.add(totalFoodMenu.get(choice));
+
+                            }
                         }
 
                     }
 
                 } // 4. Purchase order
                 else if (choose == 4) {
+                    floodScreen();
                     System.out.println("------- 4. Purchase order -------");
 
                     double totalPrice = 0;
@@ -113,8 +147,23 @@ public class Customer extends Users {
                     int conf = sc.nextInt();
                     if (conf == 1) {
                         for (int i = 0; i < basket.size(); i++) {
-                            order.addFood(basket.get(i));
+                            totalPrice += basket.get(i).getPrice();
                         }
+                        System.out.println("Total Price :" + totalPrice);
+                        System.out.println(" ** Are you sure want to purchase order now !!! ** ");
+                        System.out.println("** Type 1 = yes, 2 = no **");
+                        System.out.print(">>>");
+                        int conf = sc.nextInt();
+                        if (conf == 1) {
+                            for (int i = 0; i < basket.size(); i++) {
+                                order.addFood(basket.get(i));
+                            }
+
+                            queue.enqueue(order);
+                            basket.clear();
+                            floodScreen();
+                            System.out.println(" --- Purchase successfull !!! --- ");
+                        } else {
 
                         queue.enqueue(order);
                         System.out.println(" --- Purchase successfull !!! --- ");
@@ -123,14 +172,19 @@ public class Customer extends Users {
                     }
                 } // 5. Cancel order
                 else if (choose == 5) {
-                    System.out.println("------- 5. Remove basket item -------");
+                    floodScreen();
+                    System.out.println("------- 5. Remove all items in basket -------");
 
                     System.out.println(" !!! Are you sure you want to delete all item? !!! ");
                     System.out.println("** Type 1 = yes, 2 = no **");
+                    System.out.print(">>>");
                     int conf = sc.nextInt();
 
                     if (conf == 1) {
                         basket.clear();
+                        floodScreen();
+                        System.out.println(" !!! Your basket is empty !!! ");
+
                     } else {
 
                     }

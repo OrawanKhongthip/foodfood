@@ -74,12 +74,12 @@ public class InfiniteCircularArrayQueue {
 			System.out.println("Queue is empty");
 		} else {
 			// printArray();
-			System.out.print(" ===== Queues ===== ");
+			System.out.println(" ============== Queues ============== ");
 			
 			int curr_idx = this.front;
 			int total_elem = this.size;
 			for (int i = 1; i <= total_elem; i++) {
-				System.out.println("Queue Number: " + i);
+				System.out.println("------ Queue Number: " + i + " ------");
 				for (int j = 0; j < this.data[curr_idx].getFoodArrayList().size(); j++) {
 					System.out.println("Order Name: " + this.data[curr_idx].getOrderName());
 					System.out.println("Food Name: " + this.data[curr_idx].getFoodArrayList().get(j).getName());
