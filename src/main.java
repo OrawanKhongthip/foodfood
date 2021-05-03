@@ -13,15 +13,15 @@ public class Main {
             System.out.println("Enter types of user : 1 = Customer, 2 = Chef or types 98 to exit.");
             System.out.print("•̀.̫•́✧ >> : ");
             inputrole = sc.nextInt();
-
+            Users user[] = new Users[2];
             if (inputrole == 1) {
                 // Customer area
-                Customer ctm = new Customer();
-                ctm.control();
+                user[0] = new Customer();
+                user[0].control();
                 
             } else if (inputrole == 2) {
-                Chef ch = new Chef();
-                ch.control();
+                user[1] = new Chef();
+                user[1].control();
             } else if (inputrole == 98) {
                 System.out.println("Thanks, see you later! óò");
             }
